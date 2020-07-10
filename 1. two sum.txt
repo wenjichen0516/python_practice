@@ -1,0 +1,42 @@
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dictionary = {}
+        
+        for i in range(len(nums)):
+            sec = target - nums[i]
+            
+            if(sec in dictionary.keys()):
+                sec_index = dictionary.get(sec)
+                
+                return sorted([i,sec_index])
+            
+            dictionary.update({nums[i]:i})
+
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> m = new HashMap<Integer, Integer>();
+        int[] res = new int[2];
+        for(int i = 0; i < nums.length; i++){
+            if(m.containsKey(target - nums[i])){
+                res[0] = i;
+                res[1] = m.get(target - nums[i]);
+                return res;
+            }
+            m.put(nums[i],i);
+        }
+        return res;
+    }
+}

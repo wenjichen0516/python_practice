@@ -1,0 +1,96 @@
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Example:
+
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+
+
+
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        l4 = l3 = ListNode(0)
+        carry = 0
+        
+        while l1 or l2:
+            __sum = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
+            l4.next = ListNode(__sum % 10)
+            carry = __sum // 10
+            print(l3)
+            l4 = l4.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        
+        if carry == 1:
+            l4.next = ListNode(1)
+        
+        return l3.next
+
+
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(-1);
+        ListNode cur  = res;
+        int carry = 0;
+        
+        while(l1 != null || l2 != null){
+            int val1 = l1 != null ? l1.val : 0;
+            int val2 = l2 != null ? l2.val : 0;
+            int sum = val1 + val2 + carry;
+            carry = sum >= 10 ? 1 : 0;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+            
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+        }
+        
+        if(carry > 0){
+            cur.next = new ListNode(1);
+        }
+        
+        return res.next;
+    }
+}
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(-1);
+        ListNode cur = res;
+        int sum = 0;
+        while(l1 != null || l2 != null || sum > 0){
+            int val1 = l1 != null ? l1.val : 0;
+            int val2 = l2 != null ? l2.val : 0;
+            sum += val1 + val2;
+            
+            cur.next = new ListNode(sum % 10);
+            sum /= 10;
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+            cur = cur.next;
+        }
+        return res.next;
+    }
+}

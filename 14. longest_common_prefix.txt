@@ -1,0 +1,65 @@
+14. Longest Common Prefix
+Easy
+
+2355
+
+1786
+
+Add to List
+
+Share
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+Example 1:
+
+Input: ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        import os
+        
+        return os.path.commonprefix(strs)
+            
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        result = ""
+        if len(strs) == 0 or not strs: return result
+        strs.sort()
+        first,last = strs[0],strs[-1]
+        i = 0
+        
+        while i < min(len(first),len(last)):
+            if first[i] == last[i]:
+                result += first[i]
+                i += 1
+            else:
+                break
+        
+        return result
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0) return "";
+        Arrays.sort(strs);
+        char[] str1 = strs[0].toCharArray();
+        char[] str2 = strs[strs.length-1].toCharArray();
+        int len = Math.min(str1.length, str2.length);
+        int i = 0;
+        while(i < len){
+            if(str1[i] == str2[i])
+                i++;
+            else
+                break;
+        }
+        return strs[0].substring(0,i);
+    }
+}            

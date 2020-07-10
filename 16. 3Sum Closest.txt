@@ -1,0 +1,58 @@
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int sum = nums[0] + nums[1] + nums[2];
+        int res = sum;
+        int diff = Math.abs(target - sum);
+        
+        for(int i = 0; i < nums.length-2; i++){
+            int right = i + 1;
+            int left = nums.length - 1;
+            while(right < left){
+                int sum_new = nums[i] + nums[right] + nums[left];
+                int diff_new = Math.abs(target - sum_new);
+                if(diff_new < diff){
+                    diff = diff_new;
+                    res = sum_new;
+                }     
+                if(sum_new > target)
+                    left--;
+                else if(sum_new < target){
+                    right++;
+                }     
+                else{
+                   right++;
+                    left--; 
+                }
+                    
+                
+            }
+        }
+        return res;
+    }
+}
+
+
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        cloest = nums[0] + nums[1] + nums[2]
+        diff = abs(target - cloest)
+        
+        for i in range(len(nums)):
+            start, end = i + 1, len(nums) - 1     
+            while start < end:
+                _sum = nums[i] + nums[start] + nums[end]
+                new_diff = abs(target - _sum)
+                if diff > new_diff:
+                    diff = new_diff
+                    cloest = _sum
+                if _sum > target:
+                    end -= 1
+                elif _sum < target:
+                    start += 1
+                else:
+                    start += 1
+                    end  -=1
+                
+        return cloest
