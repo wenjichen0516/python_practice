@@ -1,0 +1,52 @@
+class Solution {
+    public static String countAndSay(int n) {
+        String temp = "1";
+        while(n>1){
+            temp = Say(temp);
+            n--;
+        }
+        return temp;
+    }
+
+    public static String Say(String str){
+        char[] chars = str.toCharArray();
+        StringBuilder res = new StringBuilder();
+        int sum =0;
+        char pre = chars[0];
+        for (int i = 0; i < chars.length ; i++) {
+            if(chars[i]==pre)
+                sum++;
+            else{
+                res.append(sum);
+                res.append(pre);
+                sum = 1;
+                pre = chars[i];
+            }
+            if(i==chars.length-1){  //注意到字符末尾后要添加一次，因为不会再循环了
+                res.append(sum);
+                res.append(pre);
+            }
+        }
+        return res.toString();
+    }
+}
+
+
+class Solution:
+    def countAndSay(self, n: int) -> str:
+	res = '1'
+
+	for i in range(n-1):
+	    prev = res[0]
+	    count = 1
+	    ans = ''
+	    for j in range(1, len(res)):
+		cur = res[j]
+		if prev != cur:
+		    ans += str(count) + str(prev)
+		    prev = cur
+ 		    count = 0
+		count += 1
+	    res = ans + str(count) + str(prev)
+	
+	return res
