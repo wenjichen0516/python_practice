@@ -1,0 +1,6 @@
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        def inOrder(r):
+            return inOrder(r.left) + [r.val] + inOrder(r.right) if r else []
+
+        return inOrder(root)[k-1]
